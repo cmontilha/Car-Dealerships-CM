@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEALERSHIPS CM</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6COIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <script>
+    const logout = async () => {
+      const logoutUrl = `${window.location.origin}/djangoapp/api/logout/`;
+      const res = await fetch(logoutUrl, { method: 'POST' });
+      if (res.ok) {
+        const username = sessionStorage.getItem('username');
+        sessionStorage.removeItem('username');
+        window.location.href = window.location.origin;
+        window.location.reload();
+        alert(`Logging out ${username || ''}...`);
+      } else {
+        alert('The user could not be logged out.');
+      }
+    };
+
+    const checkSession = () => {
+      const currUser = sessionStorage.getItem('username');
+      const container = document.getElementById('loginlogout');
+      if (!container) {
+        return;
+      }
+      if (currUser && currUser !== '') {
+        container.innerHTML = `
+          <span class="nav-username me-3">${currUser}</span>
+          <a class="btn btn-outline-accent" onclick="logout()" href="#">Logout</a>
+        `;
+      } else {
+        container.innerHTML = `
+          <a class="btn btn-outline-accent" href="/login/">Login</a>
+          <a class="btn btn-accent ms-lg-2 mt-2 mt-lg-0" href="/register/">Register</a>
+        `;
+      }
+    };
+  </script>
+</head>
+<body onload="checkSession()">
+  <nav class="navbar navbar-expand-lg navbar-dark primary-nav fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">DEALERSHIPS CM</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-3">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact/">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/dealers/">Dealers</a>
+          </li>
+        </ul>
+        <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-2 ms-lg-4 mt-3 mt-lg-0" id="loginlogout">
+          <a class="btn btn-outline-accent" href="/login/">Login</a>
+          <a class="btn btn-accent ms-lg-2 mt-2 mt-lg-0" href="/register/">Register</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="dealers-hero">
+      <h1>Exclusive Inventory</h1>
+      <p>
+        Discover a curated collection of performance machines and luxury SUVs sourced from our nationwide network. Each vehicle is inspected, detailed, and delivered with bespoke concierge support.
+      </p>
+    </section>
+
+    <section class="dealers-grid">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=80" alt="2024 Aurora GT in a showroom">
+        <div class="dealer-card-body">
+          <h2>2024 Aurora GT</h2>
+          <p>
+            Twin-turbocharged V8 with adaptive air suspension and handcrafted interior detailing finished in obsidian leather.
+          </p>
+          <div class="dealer-meta">
+            <span class="dealer-price">$142,900</span>
+            <span class="dealer-tag">In Stock</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80" alt="2023 Velocity R electric coupe">
+        <div class="dealer-card-body">
+          <h2>2023 Velocity R</h2>
+          <p>
+            All-electric grand tourer featuring a 320-mile range, carbon-ceramic brakes, and immersive ambient lighting suite.
+          </p>
+          <div class="dealer-meta">
+            <span class="dealer-price">$118,450</span>
+            <span class="dealer-tag">Demo Unit</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1200&q=80" alt="2024 Summit LX SUV">
+        <div class="dealer-card-body">
+          <h2>2024 Summit LX</h2>
+          <p>
+            Seven-passenger SUV with executive captain chairs, panoramic roof, and driver assistance calibrated for city cruising.
+          </p>
+          <div class="dealer-meta">
+            <span class="dealer-price">$98,600</span>
+            <span class="dealer-tag">Arriving</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80" alt="2024 Apex RS roadster">
+        <div class="dealer-card-body">
+          <h2>2024 Apex RS</h2>
+          <p>
+            Lightweight roadster engineered for track days with active aero, ceramic exhaust, and configurable drive modes.
+          </p>
+          <div class="dealer-meta">
+            <span class="dealer-price">$129,300</span>
+            <span class="dealer-tag">Featured</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O71a6N6AUaPcC6B+VVmc8P0R8H3o9ct3Q" crossorigin="anonymous"></script>
+</body>
+</html>

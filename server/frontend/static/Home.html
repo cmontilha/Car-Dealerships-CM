@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEALERSHIPS CM</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <script>
+    const logout = async () => {
+      const logoutUrl = `${window.location.origin}/djangoapp/api/logout/`;
+      const res = await fetch(logoutUrl, { method: 'POST' });
+      if (res.ok) {
+        const username = sessionStorage.getItem('username');
+        sessionStorage.removeItem('username');
+        window.location.href = window.location.origin;
+        window.location.reload();
+        alert(`Logging out ${username || ''}...`);
+      } else {
+        alert('The user could not be logged out.');
+      }
+    };
+
+    const checkSession = () => {
+      const currUser = sessionStorage.getItem('username');
+      const container = document.getElementById('loginlogout');
+      if (!container) {
+        return;
+      }
+      if (currUser && currUser !== '') {
+        container.innerHTML = `
+          <span class="nav-username me-3">${currUser}</span>
+          <a class="btn btn-outline-accent" onclick="logout()" href="#">Logout</a>
+        `;
+      } else {
+        container.innerHTML = `
+          <a class="btn btn-outline-accent" href="/login/">Login</a>
+          <a class="btn btn-accent ms-lg-2 mt-2 mt-lg-0" href="/register/">Register</a>
+        `;
+      }
+    };
+  </script>
+</head>
+<body onload="checkSession()">
+  <nav class="navbar navbar-expand-lg navbar-dark primary-nav fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">DEALERSHIPS CM</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact/">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/dealers/">Dealers</a>
+          </li>
+        </ul>
+        <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-2 ms-lg-4 mt-3 mt-lg-0" id="loginlogout">
+          <a class="btn btn-outline-accent" href="/login/">Login</a>
+          <a class="btn btn-accent ms-lg-2 mt-2 mt-lg-0" href="/register/">Register</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="hero-wrapper">
+      <div class="card">
+        <img src="{% static 'car_dealership.jpg' %}" class="card-img-top" alt="Luxury car dealership interior">
+        <div class="banner">
+          <h5>Welcome to our Dealerships!</h5>
+          <p>Explore curated collections of luxury and performance vehicles selected to elevate every driving experience.</p>
+          <a href="/dealers/" class="btn btn-accent mt-3">View Dealerships</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O71a6N6AUaPcC6B+VVmc8P0R8H3o9ct3Q" crossorigin="anonymous"></script>
+</body>
+</html>

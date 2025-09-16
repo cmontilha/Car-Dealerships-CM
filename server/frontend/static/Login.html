@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEALERSHIPS CM</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <script>
+    const logout = async () => {
+      const logoutUrl = `${window.location.origin}/djangoapp/api/logout/`;
+      const res = await fetch(logoutUrl, { method: 'POST' });
+      if (res.ok) {
+        const username = sessionStorage.getItem('username');
+        sessionStorage.removeItem('username');
+        window.location.href = window.location.origin;
+        window.location.reload();
+        alert(`Logging out ${username || ''}...`);
+      } else {
+        alert('The user could not be logged out.');
+      }
+    };
+
+    const checkSession = () => {
+      const currUser = sessionStorage.getItem('username');
+      const container = document.getElementById('loginlogout');
+      if (!container) {
+        return;
+      }
+      if (currUser && currUser !== '') {
+        container.innerHTML = `
+          <span class="nav-username me-3">${currUser}</span>
+          <a class="btn btn-outline-accent" onclick="logout()" href="#">Logout</a>
+        `;
+      } else {
+        container.innerHTML = `
+          <a class="btn btn-outline-accent" href="/login/">Login</a>
+          <a class="btn btn-accent ms-lg-2 mt-2 mt-lg-0" href="/register/">Register</a>
+        `;
+      }
+    };
+  </script>
+</head>
+<body onload="checkSession()">
+  <nav class="navbar navbar-expand-lg navbar-dark primary-nav fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">DEALERSHIPS CM</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-3">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact/">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/dealers/">Dealers</a>
+          </li>
+        </ul>
+        <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-2 ms-lg-4 mt-3 mt-lg-0" id="loginlogout">
+          <a class="btn btn-outline-accent" href="/login/">Login</a>
+          <a class="btn btn-accent ms-lg-2 mt-2 mt-lg-0" href="/register/">Register</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="form-page">
+    <div class="form-wrapper">
+      <h1>Login</h1>
+      <p>Access your personalized dashboard to follow leads, manage reviews, and book exclusive experiences.</p>
+      <div class="alert d-none" id="loginMessage" role="alert"></div>
+      <form action="#" method="post" id="loginForm" novalidate>
+        <div class="mb-4">
+          <label for="loginUsername" class="form-label">Username</label>
+          <input type="text" class="form-control" id="loginUsername" name="username" placeholder="Your username" required>
+        </div>
+        <div class="mb-4">
+          <label for="loginPassword" class="form-label">Password</label>
+          <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Enter your password" required>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="rememberMe">
+            <label class="form-check-label" for="rememberMe">
+              Remember me
+            </label>
+          </div>
+          <a href="#" class="small text-secondary">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn btn-accent w-100">Sign In</button>
+      </form>
+      <p class="form-text mt-4 mb-0">Don't have an account? <a href="/register">Create one now</a>.</p>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      checkSession();
+      const form = document.getElementById('loginForm');
+      const message = document.getElementById('loginMessage');
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        message.classList.add('d-none');
+        message.classList.remove('alert-danger', 'alert-success');
+
+        const username = form.username.value.trim();
+        const password = form.password.value;
+
+        const payload = {
+          username,
+          password,
+        };
+
+        try {
+          const response = await fetch(`${window.location.origin}/djangoapp/api/login/`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+          });
+
+          const data = await response.json();
+          if (response.ok && data.user) {
+            sessionStorage.setItem('username', data.user.username);
+            message.textContent = 'Login successful! Redirecting...';
+            message.classList.add('alert', 'alert-success');
+            message.classList.remove('d-none');
+            setTimeout(() => {
+              window.location.href = '/';
+            }, 500);
+          } else {
+            const errorMessage = data.error || 'Invalid username or password.';
+            message.textContent = errorMessage;
+            message.classList.add('alert', 'alert-danger');
+            message.classList.remove('d-none');
+          }
+        } catch (error) {
+          message.textContent = 'Unexpected error while communicating with the server.';
+          message.classList.add('alert', 'alert-danger');
+          message.classList.remove('d-none');
+        }
+      });
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O71a6N6AUaPcC6B+VVmc8P0R8H3o9ct3Q" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+.inventory-page {
+  background-color: #f1f5f9;
+  min-height: 100vh;
+}
+
+.inventory-hero {
+  background: linear-gradient(120deg, #0f172a, #312e81);
+}
+
+.inventory-container {
+  margin-top: -4rem;
+  padding-bottom: 4rem;
+}
+
+.filters-card {
+  background-color: #ffffff;
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+  position: sticky;
+  top: 7rem;
+}
+
+.filters-card .form-control,
+.filters-card .form-select {
+  border-radius: 0.9rem;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+.filters-card .form-control:focus,
+.filters-card .form-select:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 0.15rem rgba(79, 70, 229, 0.18);
+}
+
+.car-card {
+  background-color: #ffffff;
+  border-radius: 1.1rem;
+  overflow: hidden;
+  box-shadow: 0 18px 35px rgba(30, 41, 59, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.car-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 50px rgba(30, 41, 59, 0.2);
+}
+
+.car-card-image {
+  background-position: center;
+  background-size: cover;
+  height: 180px;
+}
+
+.car-card-body {
+  padding: 1.5rem;
+}
+
+.empty-state {
+  background-color: #ffffff;
+  border-radius: 1.25rem;
+  padding: 3rem;
+  text-align: center;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+}

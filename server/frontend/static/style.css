@@ -1,0 +1,444 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-body: #050505;
+  --bg-surface: rgba(15, 15, 22, 0.95);
+  --bg-elevated: rgba(18, 18, 26, 0.95);
+  --accent: #f6c90e;
+  --accent-glow: 0 0 12px rgba(246, 201, 14, 0.7);
+  --text-primary: #f8f8f8;
+  --text-secondary: #b9b9c3;
+  --border-color: rgba(246, 201, 14, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, rgba(246, 201, 14, 0.08), transparent 55%), var(--bg-body);
+  color: var(--text-primary);
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  padding-top: 88px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: var(--accent);
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+main {
+  padding: 3rem 1.5rem;
+}
+
+.navbar.primary-nav {
+  background: linear-gradient(90deg, rgba(10, 10, 18, 0.95), rgba(8, 8, 12, 0.95));
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  z-index: 1030;
+}
+
+.navbar.primary-nav .navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.18rem;
+  font-size: 1.1rem;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.navbar.primary-nav .navbar-brand:hover {
+  color: var(--accent);
+  text-shadow: var(--accent-glow);
+}
+
+.navbar.primary-nav .nav-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.navbar.primary-nav .nav-link.active,
+.navbar.primary-nav .nav-link:hover,
+.navbar.primary-nav .nav-link:focus {
+  color: var(--accent);
+  text-shadow: var(--accent-glow);
+}
+
+.nav-username {
+  font-weight: 600;
+  color: var(--accent);
+  text-shadow: var(--accent-glow);
+}
+
+.btn-accent,
+.btn-outline-accent {
+  padding: 0.45rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: #060607;
+  border: 1px solid var(--accent);
+  box-shadow: var(--accent-glow);
+}
+
+.btn-accent:hover,
+.btn-accent:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(246, 201, 14, 0.8);
+  color: #060607;
+}
+
+.btn-outline-accent {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+.btn-outline-accent:hover,
+.btn-outline-accent:focus {
+  background: rgba(246, 201, 14, 0.18);
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--accent-glow);
+}
+
+.hero-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  color: var(--text-primary);
+}
+
+.card .card-body {
+  padding: 2rem;
+}
+
+.banner {
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+.banner h5 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  color: var(--accent);
+  text-shadow: var(--accent-glow);
+}
+
+.banner p {
+  color: var(--text-secondary);
+  max-width: 520px;
+}
+
+.dealers-hero {
+  max-width: 960px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.dealers-hero h1 {
+  font-size: 2.4rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18rem;
+  margin-bottom: 1.25rem;
+  color: var(--accent);
+  text-shadow: var(--accent-glow);
+}
+
+.dealers-hero p {
+  color: var(--text-secondary);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.dealers-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dealers-grid .card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.dealers-grid .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+}
+
+.dealers-grid .card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.dealer-card-body {
+  padding: 1.75rem;
+}
+
+.dealer-card-body h2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  margin-bottom: 0.75rem;
+  color: var(--accent);
+  text-shadow: var(--accent-glow);
+}
+
+.dealer-card-body p {
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.dealer-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.dealer-price {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.dealer-tag {
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.08rem;
+}
+
+.section-card {
+  padding: 3rem;
+  margin: 0 auto;
+  max-width: 1100px;
+}
+
+.section-card h1,
+.section-card h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  color: var(--accent);
+  text-shadow: var(--accent-glow);
+}
+
+.section-card p {
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin: 2.5rem auto 0;
+  max-width: 1100px;
+}
+
+.team-grid .card {
+  flex: 1 1 280px;
+  max-width: 320px;
+  text-align: center;
+}
+
+.team-grid .title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.team-grid .card p {
+  color: var(--text-secondary);
+}
+
+.contact-hero {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.contact-hero h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  color: var(--accent);
+  text-shadow: var(--accent-glow);
+}
+
+.contact-details {
+  background: var(--bg-elevated);
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  padding: 2.5rem;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+}
+
+.contact-details h5 {
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.contact-details p {
+  margin-bottom: 0;
+  color: var(--text-secondary);
+}
+
+.form-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 140px);
+  padding: 3rem 1.5rem;
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.65);
+}
+
+.form-wrapper h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.18rem;
+  text-shadow: var(--accent-glow);
+}
+
+.form-wrapper p {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
+}
+
+.form-label {
+  font-weight: 500;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.08rem;
+}
+
+.form-control {
+  background: rgba(8, 8, 12, 0.85);
+  border: 1px solid rgba(246, 201, 14, 0.35);
+  border-radius: 14px;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+}
+
+.form-control:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem rgba(246, 201, 14, 0.35);
+  background: rgba(8, 8, 12, 0.95);
+  color: var(--text-primary);
+}
+
+.form-text {
+  color: var(--text-secondary);
+}
+
+.form-text a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+@media (max-width: 992px) {
+  body {
+    padding-top: 72px;
+  }
+
+  main {
+    padding: 2.5rem 1rem;
+  }
+
+  .navbar.primary-nav .nav-link {
+    padding-left: 0;
+  }
+
+  .hero-wrapper {
+    gap: 1.5rem;
+  }
+
+  .section-card {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .form-page {
+    padding: 2.5rem 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .btn-accent,
+  .btn-outline-accent {
+    width: 100%;
+    text-align: center;
+  }
+
+  #loginlogout {
+    width: 100%;
+  }
+
+  .form-wrapper {
+    padding: 2rem 1.5rem;
+  }
+}

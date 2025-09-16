@@ -1,0 +1,39 @@
+.profile-page {
+  background-color: #eef2ff;
+  min-height: 100vh;
+}
+
+.profile-header {
+  border-radius: 1.25rem;
+  border: none;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #4338ca, #312e81);
+  color: #ffffff;
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  min-width: 120px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.comment-preview {
+  color: #4b5563;
+  margin-bottom: 0.35rem;
+  max-width: 360px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

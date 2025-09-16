@@ -1,0 +1,48 @@
+.comment-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.comment-item {
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  padding: 1.25rem;
+  background-color: #f9fafb;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.comment-meta {
+  color: #9ca3af;
+  font-size: 0.85rem;
+}
+
+.comment-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.comment-content {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: #374151;
+  white-space: pre-wrap;
+}
+
+.comment-form textarea.form-control {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.comment-replies {
+  margin-top: 1.25rem;
+  margin-left: 1.25rem;
+  border-left: 2px solid rgba(148, 163, 184, 0.35);
+  padding-left: 1rem;
+}
